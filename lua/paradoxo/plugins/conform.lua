@@ -19,18 +19,20 @@ return {
             lua = { "stylua" },
             -- Conform will run multiple formatters sequentially
             python = { "ruff_fix", "ruff_format" },
-            -- javascript = { "prettierd", "prettier", stop_after_first = true },
+            javascript = { "prettierd", "prettier", stop_after_first = true },
+            html = { "prettierd", "prettier", stop_after_first = true },
+            css = { "prettierd", "prettier", stop_after_first = true },
         },
         format_on_save = {
             timeout_ms = 500,
             lsp_format = "fallback",
         },
         -- Customize formatters
-        -- formatters = {
-        --   shfmt = {
-        --     prepend_args = { "-i", "2" },
-        --   },
-        -- },
+        formatters = {
+            -- shfmt = {
+            --   prepend_args = { "-i", "2" },
+            -- },
+        },
     },
     init = function()
         -- If you want the formatexpr, here is the place to set it
