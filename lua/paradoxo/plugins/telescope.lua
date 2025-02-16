@@ -13,9 +13,12 @@ return {
         require('telescope').load_extension('fzf')
 
         local builtin = require('telescope.builtin')
-        vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Find Help" })
-        vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Find Files" })
-        vim.keymap.set('n', '<leader>fa', function() builtin.find_files({no_ignore = true}) end, { desc = "Find Files" })
-        vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Find Grep" })
+        local map = vim.keymap.set
+        map('n', '<leader>fh', builtin.help_tags, { desc = "Find Help" })
+        map('n', '<leader>ff', builtin.find_files, { desc = "Find Files" })
+        map('n', '<leader>fa', function() builtin.find_files({no_ignore = true, hidden=true}) end, { desc = "Find All Files" })
+        map('n', '<leader>fg', builtin.live_grep, { desc = "Find Grep" })
+        map("n", "<leader>fc", builtin.git_commits, { desc = "Find commits" } )
+        map("n", "<leader>fs", builtin.git_status, { desc = "Find status" } )
     end
 }

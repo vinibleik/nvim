@@ -24,8 +24,10 @@ return {
                 vim.keymap.set("n", "<leader>ga", ":Git add .<CR>", opts "Git Add all")
                 vim.keymap.set("n", "<leader>gck", ":Git checkout", opts "Git Checkout")
                 vim.keymap.set("n", "<leader>gsw", ":Git switch", opts "Git Switch")
-                vim.keymap.set("n", "<leader>gst", ":Git stash<CR>", opts "Git Stash")
+                vim.keymap.set("n", "<leader>gsh", ":Git stash<CR>", opts "Git Stash")
                 vim.keymap.set("n", "<leader>gsa", ":Git stash --include-untracked<CR>", opts "Git Stash All")
+                vim.keymap.set("n", "<leader>gst", ":Git status<CR>", opts "Git Status")
+                vim.keymap.set("n", "<leader>gcm", ":Git commit<CR>", opts "Git Commit")
             end,
         })
     end
