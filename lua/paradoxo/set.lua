@@ -48,4 +48,3 @@ vim.opt.colorcolumn = "80"
 vim.opt.foldenable = true
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevel = 99
-
