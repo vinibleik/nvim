@@ -14,7 +14,7 @@ map("n", "N", "Nzzzv")
 map("n", "{", "{zzzv")
 map("n", "}", "}zzzv")
 map("n", "<leader>p", [["_dP]])
-map("n", "<C-a>", ":%d<CR>i", { desc = "Delete whole file" } )
+map("n", "<C-a>", ":%d<CR>i", { desc = "Delete whole file" })
 
 map("n", "<leader>wo", "<C-w>o", { desc = "Close all other windows" })
 map("n", "<leader>wq", "<C-w>q", { desc = "Quit window" })
@@ -46,3 +46,20 @@ map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 
 map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
 map("n", "<leader>x", "<cmd>bd<CR>", { desc = "buffer delete" })
+
+map("n", "<leader>rn", function()
+    local cmds = {
+        python = "python3 %",
+    }
+    local filetype = vim.bo.filetype
+    local cmd = cmds[filetype]
+
+    if cmd == nil then
+        print("File format not supported")
+        return
+    end
+    local percent_of_win = 0.4
+    local cur_win_height = vim.api.nvim_win_get_height(0)
+    local term_height = math.floor(cur_win_height * percent_of_win)
+    vim.cmd(":below " .. term_height .. " split | terminal " .. cmd)
+end, { desc = "Run the current file" })
