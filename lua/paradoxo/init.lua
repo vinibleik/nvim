@@ -1,23 +1,35 @@
-require "paradoxo.set"
-require "paradoxo.remap"
-require "paradoxo.lazy"
+require("paradoxo.set")
+require("paradoxo.remap")
+require("paradoxo.lazy")
 
 -- local augroup = vim.api.nvim_create_augroup
 -- local autocmd = vim.api.nvim_create_autocmd
 
-local yank_group = vim.api.nvim_create_augroup('HighlightYank', {})
-vim.api.nvim_create_autocmd('TextYankPost', {
+local yank_group = vim.api.nvim_create_augroup("HighlightYank", {})
+vim.api.nvim_create_autocmd("TextYankPost", {
     group = yank_group,
-    pattern = '*',
+    pattern = "*",
     callback = function()
         vim.highlight.on_yank({
-            higroup = 'IncSearch',
+            higroup = "IncSearch",
             timeout = 50,
         })
     end,
 })
 
--- local paradoxo = augroup('paradoxo', {})
+local paradoxo = vim.api.nvim_create_augroup("paradoxo", {})
+vim.api.nvim_create_autocmd("BufEnter", {
+    group = paradoxo,
+    pattern = { "*.ts", "*.mts" },
+    callback = function()
+        vim.keymap.set("n", "<leader>cmp", function()
+            local percent_of_win = 0.5
+            local cur_win_height = vim.api.nvim_win_get_height(0)
+            local term_height = math.floor(cur_win_height * percent_of_win)
+            vim.cmd(":below " .. term_height .. " split | terminal npx tsc")
+        end)
+    end,
+})
 -- autocmd('LspAttach', {
 --     group = paradoxo,
 --     callback = function(e)

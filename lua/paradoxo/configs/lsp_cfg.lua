@@ -48,12 +48,12 @@ lspconfig.pyright.setup({
             -- Using Ruff's import organizer
             disableOrganizeImports = true,
         },
-        python = {
-            analysis = {
-                -- Ignore all files for analysis to exclusively use Ruff for linting
-                ignore = { "*" },
-            },
-        },
+        -- python = {
+        --     analysis = {
+        --         -- Ignore all files for analysis to exclusively use Ruff for linting
+        --         ignore = { "*" },
+        --     },
+        -- },
     },
 })
 
@@ -73,6 +73,45 @@ lspconfig.html.setup({
     capabilities = capabilities,
 })
 -- Web/Node.js
+
+-- Go
+lspconfig.gopls.setup({
+    capabilities = capabilities,
+    -- settings = { I'm using conform
+    --     gopls = {
+    --         gofumpt = true,
+    --     },
+    -- },
+})
+-- Go
+
+-- Rust
+lspconfig.rust_analyzer.setup({
+    capabilities = capabilities,
+    -- settings = {
+    -- to enable rust-analyzer settings visit:
+    -- https://github.com/rust-analyzer/rust-analyzer/blob/master/docs/user/generated_config.adoc
+    -- ["rust-analyzer"] = {
+    -- enable clippy on save
+    --         checkOnSave = {
+    --             command = "clippy",
+    --         },
+    --     },
+    -- },
+})
+-- Rust
+
+-- Terraform
+lspconfig.terraformls.setup({
+    capabilities = capabilities,
+})
+-- Terraform
+
+-- Docker
+lspconfig.dockerls.setup({
+    capabilities = capabilities,
+})
+-- Docker
 
 -- Lua
 lspconfig.lua_ls.setup({

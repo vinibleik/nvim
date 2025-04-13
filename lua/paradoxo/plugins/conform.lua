@@ -20,9 +20,17 @@ return {
             -- Conform will run multiple formatters sequentially
             python = { "ruff_fix", "ruff_format" },
             javascript = { "prettierd", "prettier", stop_after_first = true },
+            typescript = { "prettierd", "prettier", stop_after_first = true },
             html = { "prettierd", "prettier", stop_after_first = true },
             css = { "prettierd", "prettier", stop_after_first = true },
             scss = { "prettierd", "prettier", stop_after_first = true },
+            json = { "prettierd", "prettier", stop_after_first = true },
+            jsonc = { "prettierd", "prettier", stop_after_first = true },
+            yaml = { "prettierd", "prettier", stop_after_first = true },
+            go = { "gofumpt", "goimports" },
+            rust = { "rustfmt", lsp_format = "fallback" },
+            sql = { "sqruff" },
+            terraform = { "terraform_fmt" },
         },
         format_on_save = {
             timeout_ms = 500,

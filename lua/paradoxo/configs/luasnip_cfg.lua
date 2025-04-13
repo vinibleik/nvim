@@ -1,22 +1,44 @@
 -- vscode format
-require("luasnip.loaders.from_vscode").lazy_load { exclude = vim.g.vscode_snippets_exclude or {} }
-require("luasnip.loaders.from_vscode").lazy_load { paths = vim.g.vscode_snippets_path or "" }
+require("luasnip.loaders.from_vscode").lazy_load({ exclude = vim.g.vscode_snippets_exclude or {} })
+require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.g.vscode_snippets_path or "" })
 
 -- snipmate format
 require("luasnip.loaders.from_snipmate").load()
-require("luasnip.loaders.from_snipmate").lazy_load { paths = vim.g.snipmate_snippets_path or "" }
+require("luasnip.loaders.from_snipmate").lazy_load({ paths = vim.g.snipmate_snippets_path or "" })
 
 -- lua format
 require("luasnip.loaders.from_lua").load()
-require("luasnip.loaders.from_lua").lazy_load { paths = vim.g.lua_snippets_path or "" }
+require("luasnip.loaders.from_lua").lazy_load({ paths = vim.g.lua_snippets_path or "" })
 
 --
--- local ls = require("luasnip")
+local ls = require("luasnip")
 -- some shorthands...
--- local s = ls.snippet
+local s = ls.snippet
 -- local sn = ls.snippet_node
--- local t = ls.text_node
--- local i = ls.insert_node
+local t = ls.text_node
+local i = ls.insert_node
+ls.add_snippets("typescript", {
+    s("cl", {
+        t("console.log("),
+        i(0),
+        t(")"),
+    }),
+})
+ls.add_snippets("python", {
+    s("tig", {
+        t("# type: ignore"),
+    }),
+    s("no", {
+        t("# noqa"),
+    }),
+    s("vld", {
+        t("def __validate_"),
+        i(1, "prop"),
+        t({ "__(self, name: str, value: Any) -> bool:", "\t" }),
+        i(0, "# code here"),
+        t({ "", "\treturn True" }),
+    }),
+})
 -- local f = ls.function_node
 -- local c = ls.choice_node
 -- local d = ls.dynamic_node

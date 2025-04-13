@@ -47,9 +47,14 @@ map("v", "<leader>/", "gc", { desc = "toggle comment", remap = true })
 map("n", "<leader>b", "<cmd>enew<CR>", { desc = "buffer new" })
 map("n", "<leader>x", "<cmd>bd<CR>", { desc = "buffer delete" })
 
+map("n", "<leader>rs", "<cmd>LspRestart<CR>", { desc = "LspRestart" })
+
 map("n", "<leader>rn", function()
     local cmds = {
         python = "python3 %",
+        javascript = "node %",
+        typescript = "npx tsx %",
+        go = "go run %",
     }
     local filetype = vim.bo.filetype
     local cmd = cmds[filetype]
