@@ -17,6 +17,13 @@ local s = ls.snippet
 -- local sn = ls.snippet_node
 local t = ls.text_node
 local i = ls.insert_node
+ls.add_snippets("javascript", {
+    s("typ", {
+        t({ "/**", " * @type {" }),
+        i(0, "type"),
+        t({ "}", " * */" }),
+    }),
+})
 ls.add_snippets("typescript", {
     s("cl", {
         t("console.log("),
