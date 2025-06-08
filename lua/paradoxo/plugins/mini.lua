@@ -1,11 +1,11 @@
 return {
-    { 
-        "echasnovski/mini.nvim", 
+    {
+        "echasnovski/mini.nvim",
         version = false,
         config = function()
             require("mini.ai").setup({ n_lines = 500 })
             require("mini.pairs").setup({})
-        end
+        end,
     },
     {
         "kylechui/nvim-surround",
@@ -13,6 +13,6 @@ return {
         event = "VeryLazy",
         config = function()
             require("nvim-surround").setup({})
-        end
-    }
+        end,
+    },
 }

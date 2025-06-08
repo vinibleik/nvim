@@ -49,6 +49,8 @@ map("n", "<leader>x", "<cmd>bd<CR>", { desc = "buffer delete" })
 
 map("n", "<leader>rs", "<cmd>LspRestart<CR>", { desc = "LspRestart" })
 
+map("n", "<leader>cm", ":!chmod +x %<CR>", { desc = "chmod" })
+
 map("n", "<leader>rn", function()
     local cmds = {
         python = "python3 %",
@@ -68,3 +70,10 @@ map("n", "<leader>rn", function()
     local term_height = math.floor(cur_win_height * percent_of_win)
     vim.cmd(":below " .. term_height .. " split | terminal " .. cmd)
 end, { desc = "Run the current file" })
+
+map("n", "<leader>clr", function()
+    require("telescope.builtin").colorscheme()
+end)
+map("n", "<leader>tr", function()
+    SetColor()
+end)

@@ -18,18 +18,19 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = { "lua_ls", "pyright" },
+            automatic_enable = false,
         })
-         local border = {
-            {"╭", "FloatBorder"},
-            {"─", "FloatBorder"},
-            {"╮", "FloatBorder"},
-            {"│", "FloatBorder"},
-            {"╯", "FloatBorder"},
-            {"─", "FloatBorder"},
-            {"╰", "FloatBorder"},
-            {"│", "FloatBorder"},
+        local border = {
+            { "╭", "FloatBorder" },
+            { "─", "FloatBorder" },
+            { "╮", "FloatBorder" },
+            { "│", "FloatBorder" },
+            { "╯", "FloatBorder" },
+            { "─", "FloatBorder" },
+            { "╰", "FloatBorder" },
+            { "│", "FloatBorder" },
         }
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = border})
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
         vim.diagnostic.config({
             virtual_text = true,
             signs = true,
@@ -46,5 +47,5 @@ return {
             },
         })
         require("paradoxo.configs.lsp_cfg")
-    end
+    end,
 }

@@ -20,16 +20,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts("Code action"))
         -- map("n", "gr", vim.lsp.buf.references, opts "Show references")
         map("n", "gr", builtin.lsp_references, opts("Show references"))
-        map("n", "K", vim.lsp.buf.hover, opts("Hover"))
+        map("n", "K", function()
+            vim.lsp.buf.hover({ border = "rounded" })
+        end, opts("Hover"))
         map("n", "gws", vim.lsp.buf.workspace_symbol, opts("Workspace symbol"))
         map("n", "<leader>ra", vim.lsp.buf.rename, opts("Rename"))
         map("n", "<leader>sh", vim.lsp.buf.signature_help, opts("Signature Help"))
         map("n", "<leader>q", vim.diagnostic.setloclist, opts("Diagnostic setloclist"))
         map("n", "[d", function()
-            vim.diagnostic.goto_next({ float = { border = "rounded" } })
+            vim.diagnostic.jump({ float = { border = "rounded" }, count = 1 })
+            -- vim.diagnostic.goto_next({ float = { border = "rounded" } })
         end, opts("Goto next"))
         map("n", "]d", function()
-            vim.diagnostic.goto_prev({ float = { border = "rounded" } })
+            vim.diagnostic.jump({ float = { border = "rounded" }, count = -1 })
+            -- vim.diagnostic.goto_prev({ float = { border = "rounded" } })
         end, opts("Goto prev"))
         map("n", "<leader>fd", function()
             builtin.diagnostics({ bufnr = 0 })
@@ -50,8 +54,8 @@ lspconfig.pyright.setup({
         },
         -- python = {
         --     analysis = {
-        --         -- Ignore all files for analysis to exclusively use Ruff for linting
-        --         ignore = { "*" },
+        -- Ignore all files for analysis to exclusively use Ruff for linting
+        -- ignore = { "*" },
         --     },
         -- },
     },
