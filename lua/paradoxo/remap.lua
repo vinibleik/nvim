@@ -57,6 +57,7 @@ map("n", "<leader>rn", function()
         javascript = "node %",
         typescript = "npx tsx %",
         go = "go run %",
+        sh = "./%",
     }
     local filetype = vim.bo.filetype
     local cmd = cmds[filetype]

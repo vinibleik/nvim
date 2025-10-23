@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local map = vim.keymap.set
         map("n", "gD", vim.lsp.buf.declaration, opts("Go to declaraion"))
         -- map("n", "gd", vim.lsp.buf.definition, opts "Go to definition")
-        map("n", "gd", builtin.lsp_definitions, opts("Go to definition"))
+        map("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
         -- map("n", "gi", vim.lsp.buf.implementation, opts "Go to implementation")
         map("n", "gi", builtin.lsp_implementations, opts("Go to implementation"))
         -- map("n", "<leader>D", vim.lsp.buf.type_definition, opts "Go to type definition")
@@ -66,10 +66,52 @@ lspconfig.ruff.setup({
 })
 -- Python
 
--- Web/Node.js
-lspconfig.ts_ls.setup({
+vim.lsp.config("ts_ls", {
+    ---@param client vim.lsp.Client
+    ---@param bufnr integer
+    on_attach = function(client, bufnr)
+        vim.keymap.set("n", "<leader>org", function()
+            client:exec_cmd({
+                command = "_typescript.organizeImports",
+                arguments = { vim.api.nvim_buf_get_name(bufnr) },
+                title = "OrganizeImports",
+            })
+        end, { noremap = true, silent = true, buffer = bufnr, desc = "LSP Typescript OrganizeImports" })
+    end,
     capabilities = capabilities,
+    commands = {
+        OrganizeImports = {},
+    },
 })
+vim.lsp.enable("ts_ls")
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "*.ts", "*.js", "*.tsx", "*.jsx" },
+    group = vim.api.nvim_create_augroup("FormatConfig", { clear = true }),
+    callback = function(ev)
+        local client = vim.lsp.get_clients({ name = "ts_ls", bufnr = ev.buf })[1]
+
+        if not client then
+            return
+        end
+
+        local request_result = client:request_sync("workspace/executeCommand", {
+            command = "_typescript.organizeImports",
+            arguments = { vim.api.nvim_buf_get_name(ev.buf) },
+        })
+
+        if request_result and request_result.err then
+            vim.notify(request_result.err.message, vim.log.levels.ERROR)
+            return
+        end
+        -- local conform_opts = { bufnr = ev.buf, lsp_format = "prettierd", timeout_ms = 2000 }
+        -- require("conform").format(conform_opts)
+    end,
+})
+
+-- Web/Node.js
+-- lspconfig.ts_ls.setup({
+--     capabilities = capabilities,
+-- })
 lspconfig.cssls.setup({
     capabilities = capabilities,
 })
@@ -115,6 +157,36 @@ lspconfig.terraformls.setup({
 lspconfig.dockerls.setup({
     capabilities = capabilities,
 })
+
+lspconfig.docker_compose_language_service.setup({
+    capabilities = capabilities,
+    filetypes = { "yaml.docker-compose", "yaml", "yml" },
+    settings = {
+        telemetry = {
+            telemetryLevel = "off",
+        },
+    },
+})
+-- vim.lsp.config("docker_language_server", {
+--     cmd = { "docker-language-server", "start", "--stdio" },
+--     filetypes = { "dockerfile", "yaml.docker-compose" },
+--     settings = {
+--         telemetry = "off",
+--     },
+--     telemetry = "off",
+--     root_markers = {
+--         "Dockerfile",
+--         "docker-compose.yaml",
+--         "docker-compose.yml",
+--         "compose.yaml",
+--         "compose.yml",
+--         "docker-bake.json",
+--         "docker-bake.hcl",
+--         "docker-bake.override.json",
+--         "docker-bake.override.hcl",
+--     },
+-- })
+-- vim.lsp.enable("docker_language_server")
 -- Docker
 
 -- Lua
@@ -139,3 +211,16 @@ lspconfig.lua_ls.setup({
     },
 })
 -- Lua
+
+-- Powershell
+lspconfig.powershell_es.setup({
+    -- capabilities = capabilities,
+    bundle_path = "/home/vinicius/.local/share/nvim/mason/packages/powershell-editor-services",
+})
+-- Powershell
+
+-- Bash
+lspconfig.bashls.setup({
+    capabilities = capabilities,
+})
+-- Bash

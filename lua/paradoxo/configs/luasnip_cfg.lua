@@ -31,12 +31,24 @@ ls.add_snippets("typescript", {
         t(")"),
     }),
 })
+ls.add_snippets("typescriptreact", {
+    s("cl", {
+        t("console.log("),
+        i(0),
+        t(")"),
+    }),
+})
 ls.add_snippets("python", {
     s("tig", {
         t("# type: ignore"),
     }),
     s("no", {
         t("# noqa"),
+    }),
+    s("docs", {
+        t('"""'),
+        i(0, "Docstring"),
+        t('"""'),
     }),
     s("vld", {
         t("def __validate_"),

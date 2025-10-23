@@ -11,24 +11,21 @@ end
 return {
     {
         "tanvirtin/monokai.nvim",
-        -- config = function()
-        --     require("monokai").setup({ palette = require("monokai").soda })
-        --     SetColor()
-        -- end,
+        config = function()
+            require("monokai").setup({ palette = require("monokai").soda })
+            SetColor()
+        end,
     },
     {
         "scottmckendry/cyberdream.nvim",
         lazy = false,
         priority = 1000,
-        config = function()
-            require("cyberdream").setup({
-                -- Enable transparent background
-                transparent = true,
-            })
-            SetColor("cyberdream")
-        end,
-    },
-    {
-        "NLKNguyen/papercolor-theme",
+        -- config = function()
+        --     require("cyberdream").setup({
+        --         -- Enable transparent background
+        --         transparent = true,
+        --     })
+        --     SetColor("cyberdream")
+        -- end,
     },
 }

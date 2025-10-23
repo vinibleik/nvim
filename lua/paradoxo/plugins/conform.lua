@@ -21,6 +21,7 @@ return {
             python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
             javascript = { "prettierd", "prettier", stop_after_first = true },
             typescript = { "prettierd", "prettier", stop_after_first = true },
+            typescriptreact = { "prettierd", "prettier", stop_after_first = true },
             html = { "prettierd", "prettier", stop_after_first = true },
             css = { "prettierd", "prettier", stop_after_first = true },
             scss = { "prettierd", "prettier", stop_after_first = true },
@@ -31,9 +32,11 @@ return {
             rust = { "rustfmt", lsp_format = "fallback" },
             sql = { "sqruff" },
             terraform = { "terraform_fmt" },
+            sh = { "shfmt" },
+            bash = { "shfmt" },
         },
         format_on_save = {
-            timeout_ms = 500,
+            timeout_ms = 800,
             lsp_format = "fallback",
         },
         -- Customize formatters
